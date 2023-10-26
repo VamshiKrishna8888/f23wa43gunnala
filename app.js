@@ -23,6 +23,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/mydata', mydataRouter);
+//Computation
+app.get('/computation', (req, res) => {
+
+  // Check if the 'x' query parameter is present in the request
+  const x = parseFloat(req.query.x);
+  const x1 = x ? parseFloat(x) : Math.random() * 100;
+  const x2 = x ? parseFloat(x) : Math.random() * 100;
+
+  // Calculate the result using Math.atan2()
+  const result = Math.atan2(x1, x2);
+ 
+  // Construct the response string
+  const responseString = `Math.atan2(${x1}, ${x2}) is ${result}`;
+
+
+  res.send(responseString);
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
